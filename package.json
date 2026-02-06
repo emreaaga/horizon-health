@@ -1,0 +1,44 @@
+{
+  "name": "medical-conference-landing",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Modern medical conference landing page built with Next.js 14, TypeScript, and Tailwind CSS",
+  "homepage": "https://conference-landing-page-seven.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Eslamsamyx/conference-landing-page.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Eslamsamyx/conference-landing-page/issues"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@headlessui/react": "^2.2.4",
+    "@heroicons/react": "^2.2.0",
+    "@types/node": "^20.8.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "autoprefixer": "^10.4.0",
+    "framer-motion": "^10.16.0",
+    "lucide-react": "^0.292.0",
+    "next": "^14.0.0",
+    "postcss": "^8.4.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "sharp": "^0.34.2",
+    "tailwindcss": "^3.3.0",
+    "typescript": "^5.2.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "eslint": "^8.52.0",
+    "eslint-config-next": "^14.0.0"
+  }
+}
