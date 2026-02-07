@@ -17,10 +17,6 @@ const Process = dynamic(() => import("@/components/process"), {
 	loading: () => <div className="h-80 animate-pulse bg-gray-100 rounded-2xl" />,
 });
 
-const Doctors = dynamic(() => import("@/components/doctors"), {
-	loading: () => <div className="h-80 animate-pulse bg-gray-100 rounded-2xl" />,
-});
-
 const Contact = dynamic(() => import("@/components/contact"), {
 	loading: () => <div className="h-96 animate-pulse bg-gray-100 rounded-2xl" />,
 });
@@ -33,11 +29,11 @@ export default function Home() {
 	return (
 		<main className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
 			<Header />
+
 			<Hero />
 			<Services />
 			<Why />
 			<Process />
-			{/*<Doctors />*/}
 			<Contact />
 
 			<Footer />
