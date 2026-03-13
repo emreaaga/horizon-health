@@ -9,6 +9,7 @@ import { WhatsAppIcon } from "@/components/icons/whatsapp-icon";
 import { useHeaderMenu } from "@/components/providers/header-menu-provider";
 import { useConsultationDialog } from "@/components/providers/consultation-dialog-provider";
 import { CONTACT } from "@/components/config/contact";
+import { scrollToHash } from "@/lib/scrolls";
 
 type Props = {
 	isScrolled: boolean;
@@ -33,26 +34,17 @@ export default function MobileMenu({ isScrolled }: Props) {
 	const cta = isScrolled
 		? "bg-black text-white hover:bg-gray-900"
 		: "bg-white text-black hover:bg-gray-100";
-	const divider = isScrolled ? "border-gray-200" : "border-white/15";
 
-	const scrollToHref = (href: string) => {
-		if (href.startsWith("#")) {
-			const el = document.querySelector(href);
-			if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-			else window.location.hash = href;
-			return;
-		}
-		window.location.href = href;
-	};
+	const divider = isScrolled ? "border-gray-200" : "border-white/15";
 
 	return (
 		<AnimatePresence>
 			{isOpen && (
 				<motion.div
-					initial={{ opacity: 0, height: 0 }}
-					animate={{ opacity: 1, height: "auto" }}
-					exit={{ opacity: 0, height: 0 }}
-					className={`md:hidden rounded-xl shadow-lg mt-2 overflow-hidden transition-colors duration-300 ${panel}`}
+					initial={{ opacity: 0, height: 0, overflow: "hidden" }}
+					animate={{ opacity: 1, height: "auto", overflow: "visible" }}
+					exit={{ opacity: 0, height: 0, overflow: "hidden" }}
+					className={`md:hidden rounded-xl shadow-lg mt-2 transition-colors duration-300 ${panel}`}
 				>
 					<div className="py-3">
 						<div className="px-4 pb-3 flex items-center justify-between gap-3">
@@ -93,8 +85,20 @@ export default function MobileMenu({ isScrolled }: Props) {
 								href={item.href}
 								onClick={(e) => {
 									e.preventDefault();
+
 									close();
-									scrollToHref(item.href);
+
+									// ВАЖНО: скроллим в следующий кадр после close()
+									requestAnimationFrame(() => {
+										if (item.href.startsWith("#")) {
+											scrollToHash(item.href, {
+												offset: 80, // под fixed header (подстрой если надо)
+												retries: 80, // на случай dynamic секций
+											});
+										} else {
+											window.location.href = item.href;
+										}
+									});
 								}}
 								className={`block px-4 py-2.5 text-[15px] transition-colors duration-200 ${link}`}
 							>
@@ -109,7 +113,7 @@ export default function MobileMenu({ isScrolled }: Props) {
 								type="button"
 								onClick={() => {
 									close();
-									openConsult();
+									requestAnimationFrame(() => openConsult());
 								}}
 								className={`w-full text-center px-6 py-2.5 font-semibold rounded-xl transition-colors duration-200 ${cta}`}
 							>

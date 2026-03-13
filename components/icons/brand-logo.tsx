@@ -1,47 +1,54 @@
 "use client";
 
-import type React from "react";
 import Link from "next/link";
-import ProjectIcon from "@/components/icons/project-icon";
+import ProjectIcon from "./new-project-logo";
 
 type BrandProps = {
-	href?: string;
-	title?: string;
-	className?: string;
-	isScrolled?: boolean;
-	onClickTop?: () => void;
+  href?: string;
+  title?: string;
+  className?: string;
+  isScrolled?: boolean;
+  onClickTop?: () => void;
 };
 
 export default function BrandLogo({
-	href = "/",
-	title = "orizon Health",
-	className = "",
-	isScrolled = false,
-	onClickTop,
+  href = "/",
+  title = "Horizon health",
+  className = "",
+  isScrolled = false,
+  onClickTop,
 }: BrandProps) {
-	const textClass = isScrolled ? "text-gray-900" : "text-white";
-	const iconClass = isScrolled ? "text-gray-900" : "text-white";
+  const textClass = isScrolled ? "text-gray-900" : "text-white";
+  const iconClass = isScrolled ? "text-gray-900" : "text-white";
 
-	return (
-		<Link
-			href={href}
-			onClick={(e) => {
-				if (onClickTop) {
-					e.preventDefault();
-					onClickTop();
-				}
-			}}
-			className={`inline-flex items-center ${className}`}
-			aria-label={title}
-			title={title}
-		>
-			<ProjectIcon className={`${iconClass} shrink-0`} width={56} height={56} />
+  return (
+    <Link
+      href={href}
+      onClick={(e) => {
+        if (onClickTop) {
+          e.preventDefault();
+          onClickTop();
+        }
+      }}
+      className={`inline-flex items-center ${className}`}
+      aria-label={title}
+      title={title}
+    >
+      <ProjectIcon className={`${iconClass} shrink-0`} width={40} height={40} />
 
-			<span
-				className={`-ml-2 translate-y-[2px] text-lg leading-none font-semibold tracking-tight ${textClass}`}
-			>
-				{title}
-			</span>
-		</Link>
-	);
+      <span
+        style={{ fontFamily: "'Times New Roman', Times, serif" }}
+        className={`
+          ${textClass}
+          text-xl /* Для Times New Roman лучше взять чуть больше размер, он визуально мельче */
+          font-bold
+          tracking-tighter
+          leading-none
+          -ml-1
+        `}
+      >
+        {title}
+      </span>
+    </Link>
+  );
 }

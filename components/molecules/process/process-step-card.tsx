@@ -1,36 +1,37 @@
 "use client";
 
-import { motion } from "framer-motion";
 import type { ProcessStep } from "@/components/config/process";
+import { motion } from "framer-motion";
 
 type Props = {
-	step: ProcessStep;
-	index: number;
+  step: ProcessStep;
 };
 
-export default function ProcessStepCard({ step, index }: Props) {
-	return (
-		<motion.div
-			initial={{ opacity: 0, y: 16 }}
-			whileInView={{ opacity: 1, y: 0 }}
-			viewport={{ once: true, amount: 0.3 }}
-			transition={{ duration: 0.45, delay: index * 0.05 }}
-			className="group relative bg-white rounded-2xl p-6 border border-neutral-200 shadow-sm hover:shadow-md transition"
-		>
-			<div className="flex items-center justify-between">
-				<div className="text-neutral-700 font-extrabold text-sm tracking-wide">
-					{step.n}
-				</div>
-				<div className="h-2 w-2 rounded-full bg-neutral-400 group-hover:bg-neutral-700 transition" />
-			</div>
+const item = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
 
-			<div className="mt-3 font-bold text-neutral-900 text-base">{step.t}</div>
+export default function ProcessStepCard({ step }: Props) {
+  return (
+    <motion.div
+      variants={item}
+      className="group relative flex flex-row items-start gap-5 md:flex-col md:items-center md:gap-6"
+    >
+      <div className="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-neutral-200 bg-white shadow-sm transition-all duration-300 group-hover:scale-110 group-hover:border-gray-500 group-hover:shadow-indigo-100">
+        <span className="text-lg font-bold text-neutral-400 transition-colors duration-300 group-hover:text-gray-600">
+          {step.n}
+        </span>
+      </div>
 
-			<div className="mt-1 text-sm text-neutral-600 leading-relaxed">
-				{step.d}
-			</div>
-
-			<div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-transparent group-hover:ring-neutral-900/10 transition" />
-		</motion.div>
-	);
+      <div className="flex-1 pt-1.5 md:pt-0 md:text-center">
+        <h4 className="text-base font-extrabold leading-tight text-neutral-900">
+          {step.t}
+        </h4>
+        <p className="mt-2 text-sm leading-relaxed text-neutral-500">
+          {step.d}
+        </p>
+      </div>
+    </motion.div>
+  );
 }

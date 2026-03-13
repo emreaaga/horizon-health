@@ -54,12 +54,12 @@ export default function LanguageSelect({
 			<MenuItems
 				transition
 				className="
-          absolute right-0 z-50 mt-2 w-20 origin-top-right overflow-hidden
-          rounded-xl border border-gray-200 bg-white shadow-sm outline-none
-          data-[closed]:scale-95 data-[closed]:opacity-0
-          data-[enter]:duration-100 data-[enter]:ease-out
-          data-[leave]:duration-75 data-[leave]:ease-in
-        "
+						  absolute left-1/2 -translate-x-1/2 z-[70] mt-2 w-20 origin-top overflow-hidden
+						  rounded-xl border border-gray-200 bg-white shadow-sm outline-none
+						  data-[closed]:scale-95 data-[closed]:opacity-0
+						  data-[enter]:duration-100 data-[enter]:ease-out
+						  data-[leave]:duration-75 data-[leave]:ease-in
+						"
 			>
 				<div className="p-1">
 					{langs.map((l) => (
